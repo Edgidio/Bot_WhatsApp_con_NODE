@@ -6,9 +6,12 @@ const { Client, LocalAuth } = require('whatsapp-web.js');
 const qr_code_terminal = require('qrcode-terminal');
 require('dotenv').config();
 const qrcode = require('qrcode');
+const moment = require('moment');
 
 // modulos node
 const fs = require('fs');
+
+console.log(moment().format('LT'))
 
 console.log('Iniciando la aplicación...');
 
