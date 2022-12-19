@@ -1,15 +1,9 @@
-const express = require('express');
-const app = express();
-
 // modulos npm
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qr_code_terminal = require('qrcode-terminal');
 require('dotenv').config();
 const qrcode = require('qrcode');
 const moment = require('moment');
-
-// modulos node
-const fs = require('fs');
 
 const hora_actual = [];
 
@@ -94,8 +88,3 @@ client.on('message', msg => {
 });
     
 client.initialize();
-
-
-app.listen(process.env.PORT, () => {
-  console.log(`Servidor corriendo en: http://localhost:${process.env.PORT}/iniciar-sesion-whatsapp-web`)
-})
