@@ -17,8 +17,23 @@ app.set('PORT', process.env.PORT);
 app.use(express.json())
 app.use(express.urlencoded( {extended:false} ) );
 
+// Variables globales
+app.use( (req, res, next) => {
+
+    let bot_session ;
+
+    next();
+
+});
+
 // rutas
-/* app.use(require('./routes/auth.routes')); */
+app.get('/inicio-de-sesion_whatsapp', (req, res) => {
+    res.render('index/inicio_de_sesion_whatsapp.ejs')
+});
+
+app.get('/', (req, res) => {
+    res.render('index/inicio.ejs')
+});
 
 // Publico
 app.use(express.static(__dirname + '/public'));
