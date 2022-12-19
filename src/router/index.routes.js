@@ -3,7 +3,6 @@ const router = require('express').Router();
 // modulos npm
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qr_code_terminal = require('qrcode-terminal');
-require('dotenv').config();
 const qrcode = require('qrcode');
 const moment = require('moment');
 
