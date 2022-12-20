@@ -6,6 +6,8 @@ const path = require('path');
 
 // modulos npm
 require('dotenv').config();
+const flash = require('connect-flash');
+const session = require('express-session');
 
 
 // configuraciones express
@@ -16,24 +18,24 @@ app.set('PORT', process.env.PORT);
 // middlewares
 app.use(express.json())
 app.use(express.urlencoded( {extended:false} ) );
+app.use( session({
+    secret: 'BOTnadamas',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash())
 
 // Variables globales
 app.use( (req, res, next) => {
 
-    let bot_session ;
+    res.locals.qrr = req.flash('img_qr')
 
     next();
 
 });
 
 // rutas
-app.get('/inicio-de-sesion_whatsapp', (req, res) => {
-    res.render('index/inicio_de_sesion_whatsapp.ejs')
-});
-
-app.get('/', (req, res) => {
-    res.render('index/inicio.ejs')
-});
+app.use(require('./router/index.routes'))
 
 // Publico
 app.use(express.static(__dirname + '/public'));
