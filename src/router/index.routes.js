@@ -4,14 +4,9 @@ const router = require('express').Router();
 const { inicio_de_sesion_whatsapp } = require('../controllers/index.controller');
 
 // vista de incio de sesion
-router.get('/inicio-de-sesion_whatsapp-1', inicio_de_sesion_whatsapp);
+router.get('/inicio-de-sesion_whatsapp', inicio_de_sesion_whatsapp);
 
-// vista de incio de sesion
-router.get('/inicio-de-sesion_whatsapp-2', (req, res) => {
-    res.render('index/inicio_de_sesion_whatsapp.ejs')
-});
-
-// vista de incio de sesion
+// vista de sesion iniciada
 router.get('/', (req, res) => {
     res.render('index/inicio.ejs')
 });

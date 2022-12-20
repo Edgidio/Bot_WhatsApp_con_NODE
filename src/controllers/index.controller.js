@@ -1,13 +1,12 @@
 // modulos npm
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qr_code_terminal = require('qrcode-terminal');
 const qrcode = require('qrcode');
 const moment = require('moment');
-const { router } = require('../app');
 
+// modulos server
+
+// controlador inicio de sesion en whatsapp
 exports.inicio_de_sesion_whatsapp = async (req, res) => { 
-
-    console.log('Cargando BOT-008...');
 
     // Guardar la sesión de WhatsApp web
     const client = new Client({
@@ -17,19 +16,24 @@ exports.inicio_de_sesion_whatsapp = async (req, res) => {
         }
     });
 
+    // evento que emite un codigo qr
     client.on('qr', async (qr) => {
+        console.log('sadas')
+        
+        const { emit_qr} = require('../socket');
 
         const img_qr = await qrcode.toDataURL(qr);
 
-        console.log(img_qr);
-
-        res.locals.qrr = img_qr
+        emit_qr(img_qr);
 
     });
     
     client.on('ready', () => {
-        console.log('¡BOT-008 conectado correctamente!');
-        console.log('BOT-008 Está esperando mensajes...');
+
+        const { redirect_inicio } = require('../socket');
+
+        redirect_inicio(true);
+        
     });
         
     client.on('message', msg => {
